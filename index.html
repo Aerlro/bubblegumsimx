@@ -1,42 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Connecting to Roblox...</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <style>
-    body {
-      background-color: #1e1e2f;
-      color: white;
-      font-family: sans-serif;
-      text-align: center;
-      padding-top: 100px;
-    }
-  </style>
-  <script>
-    const params = new URLSearchParams(window.location.search);
-    const jobId = params.get("job");
-    const placeId = "85896571713843";
-
-    if (jobId) {
-      const robloxLink = `roblox://placeId=${placeId}&gameInstanceId=${jobId}`;
-      window.location.href = robloxLink;
-
-      setTimeout(() => {
-        document.getElementById("status").innerText = "Dacă nu se deschide automat, apasă pe linkul de mai jos:";
-        const a = document.createElement("a");
-        a.href = robloxLink;
-        a.innerText = "Apasă aici pentru a te conecta";
-        a.style.color = "#00b0ff";
-        document.body.appendChild(a);
-      }, 3000);
-    } else {
-      document.write("❌ Lipseste `job` din URL.");
-    }
-  </script>
-</head>
-<body>
-  <h1>🔄 Se conectează la serverul Roblox...</h1>
-  <p id="status">Te rugăm așteaptă.</p>
-</body>
+<html>
+  <head>
+    <title>Auto Join</title>
+    <meta http-equiv="refresh" content="0; url=roblox://placeId=85896571713843&gameInstanceId=" id="meta">
+    <script>
+      const urlParams = new URLSearchParams(window.location.search);
+      const jobId = urlParams.get("job");
+      if (jobId) {
+        const redirectUrl = `roblox://placeId=85896571713843&gameInstanceId=${jobId}`;
+        document.getElementById("meta").setAttribute("content", "0; url=" + redirectUrl);
+        window.location.href = redirectUrl;
+      } else {
+        document.body.innerHTML = "<h2>No jobId provided in URL</h2>";
+      }
+    </script>
+  </head>
+  <body>
+  </body>
 </html>
